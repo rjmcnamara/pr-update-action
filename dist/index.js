@@ -9799,7 +9799,7 @@ async function run() {
 
     const upperCase = (upperCase, text) => upperCase ? text.toUpperCase() : text;
 
-    const body0 = github.rest.pulls.get({
+    const body = octokit.rest.pulls.get({
               pull_number: inputs.pullNumber || github.context.payload.pull_request.number,
               owner: github.context.repo.owner,
               repo: github.context.repo.repo
