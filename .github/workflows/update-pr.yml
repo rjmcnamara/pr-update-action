@@ -1,7 +1,7 @@
 name: "Update Pull Request Body"
 
 on: 
-  workflow_call:
+  workflow_dispatch:
     inputs:
       pull-request:
         description: overide pull request number
