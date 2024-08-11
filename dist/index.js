@@ -9787,18 +9787,24 @@ async function run() {
       bodyNewlineCount: parseInt(core.getInput('body-newline-count')),
       bodyUppercaseBaseMatch: (core.getInput('body-uppercase-base-match').toLowerCase() === 'true'),
       bodyUppercaseHeadMatch: (core.getInput('body-uppercase-head-match').toLowerCase() === 'true'),
+      pullNumber: parseInt(core.getInput('pull-request-number')),
     }
 
 
     const request = {
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
-      pull_number: github.context.payload.pull_request.number,
+      pull_number: inputs.pullNumber || github.context.payload.pull_request.number,
     }
 
     const upperCase = (upperCase, text) => upperCase ? text.toUpperCase() : text;
 
-    const body = github.context.payload.pull_request?.body || '';
+    const body0 = github.rest.pulls.get({
+              pull_number: inputs.pullNumber || github.context.payload.pull_request.number,
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo
+            }).data.body || github.context.payload.pull_request?.body || '';
+    // const body = github.context.payload.pull_request?.body || '';
     core.info( `Processed body text: ${ body }`);
 
     const updateBody = ({
