@@ -31,7 +31,7 @@ jobs:
       pull-requests: write
     steps:
       - id: update_pr
-        uses: rmcnamara/pr-update-action@context-parameters
+        uses: rjmcnamara/pr-update-action@context-parameters
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           pull-request: ${{ inputs.pull-request }}
