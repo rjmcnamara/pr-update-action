@@ -35,7 +35,6 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           pull-request-number: ${{ inputs.pull-request }}
-          base-branch-regex: '.*'
           body-template: |
             - `Time Started: ${{ needs.get-mci-vars.outputs.start_time }}`
           body-update-action: 'suffix'
