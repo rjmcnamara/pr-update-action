@@ -9799,10 +9799,10 @@ async function run() {
 
     const upperCase = (upperCase, text) => upperCase ? text.toUpperCase() : text;
 
-    const body = octokit.rest.pulls.get({
-              pull_number: inputs.pullNumber || github.context.payload.pull_request.number,
+    const body = await octokit.rest.pulls.get({
               owner: github.context.repo.owner,
-              repo: github.context.repo.repo
+              repo: github.context.repo.repo,
+              pull_number: inputs.pullNumber || github.context.payload.pull_request.number,
             }).data.body || github.context.payload.pull_request?.body || '';
     // const body = github.context.payload.pull_request?.body || '';
     core.info( `Processed body text: ${ body }`);
@@ -9827,7 +9827,7 @@ async function run() {
     if (!request.pull_number) {
       core.error('Unable to retrieve the pull request number')
     }
-    
+
     if (!updateBody) {
       return;
     }
